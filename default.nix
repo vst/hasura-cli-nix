@@ -10,7 +10,7 @@ let
   ## Define the Hasura version:
   ##
   ## Note: If the Hasura version changes, `cli-ext.patch` may need to change, too.
-  version = "2.40.0";
+  version = "2.43.0";
 
   ## Get the OS and architecture:
   os = if stdenv.isDarwin then "darwin" else "linux";
@@ -21,7 +21,7 @@ let
     owner = "hasura";
     repo = "graphql-engine";
     rev = "v${version}";
-    sha256 = "sha256-KNeI7SEpdHn/M2VdyiN/WpVmswn2+w2dwv8Ng7ZBhkM=";
+    sha256 = "sha256-YEvmNqcpRB8MH2ssjaoQVBJ6FlhcVpi/7BqkgQnYNIw=";
   };
 
   ## Build the Hasura CLI extension:
