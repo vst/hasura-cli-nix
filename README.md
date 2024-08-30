@@ -40,7 +40,23 @@ pkgs.mkShell {
 }
 ```
 
-Feel free to open an issue or a pull request if you have any suggestions or improvements.
+You can use the [releases] to pin your Hasura CLI to a specific version. Feel free to open an issue or a pull request if you have any suggestions or improvements.
+
+## Building in Nix Shell
+
+To test if the derivation is building correctly, you can use the following command:
+
+```sh
+nix-build --expr '((import <nixpkgs> {}).callPackage ./default.nix {}).cli'
+```
+
+..., and then:
+
+```console
+$ ./result/bin/hasura version
+INFO hasura cli is up to date                      version=2.43.0
+INFO hasura cli                                    version=v2.43.0
+```
 
 <!-- REFERENCES -->
 
@@ -49,3 +65,4 @@ Feel free to open an issue or a pull request if you have any suggestions or impr
 [3]: https://github.com/hasura/graphql-engine/issues/8441
 [@adamgoose]: https://github.com/adamgoose
 [solution]: https://github.com/hasura/graphql-engine/issues/8441#issuecomment-2055727178
+[releases]: https://github.com/vst/hasura-cli-nix/releases
