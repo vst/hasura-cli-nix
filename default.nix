@@ -10,7 +10,7 @@ let
   ## Define the Hasura version:
   ##
   ## Note: If the Hasura version changes, `cli-ext.patch` may need to change, too.
-  version = "2.43.0";
+  version = "2.44.0";
 
   ## Get the OS and architecture:
   os = if stdenv.isDarwin then "darwin" else "linux";
@@ -21,7 +21,7 @@ let
     owner = "hasura";
     repo = "graphql-engine";
     rev = "v${version}";
-    sha256 = "sha256-YEvmNqcpRB8MH2ssjaoQVBJ6FlhcVpi/7BqkgQnYNIw=";
+    sha256 = "sha256-USGKEdH8bfUYCHAtjaUKt6LZAE8kdz9KOeCJ1jDvB9o=";
   };
 
   ## Build the Hasura CLI extension:
@@ -35,7 +35,8 @@ let
 
     patches = [ ./cli-ext.patch ];
 
-    npmInstallFlags = [ "--no-optional" ];
+    makeCacheWritable = true;
+    npmInstallFlags = [ "--verbose" "--omit=optional" ];
     npmBuildScript = "transpile";
 
     meta = {
@@ -48,7 +49,7 @@ let
 
   ## Build the Hasura CLI:
   hasura-cli = buildGoModule rec {
-    inherit version; 
+    inherit version;
 
     src = hasura-src;
     pname = "hasura-cli";
