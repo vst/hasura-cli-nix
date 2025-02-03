@@ -13,12 +13,17 @@ I understand that there has been various attempts by the community to fix this, 
 2. Use `buildFHSUserEnv`: This solution worked for me and my team for quite some time, but it has its own issues such
    as a half-broken Nix shell where many commands do not work.
 
-Recently, I bumped into the [solution] of [@adamgoose] that worked like a charm, at least for Hasura CLI v2.40.0.
+Recently, I bumped into the [solution] of [@adamgoose] that worked like a charm, at least for Hasura CLI v2.45.1.
 
 ## This Repository
 
 This repository offers [@adamgoose]'s solution as a Nix function that you can use in a Nix expression to build and install
 a functioning Hasura CLI.
+
+> [NOTE!]
+>
+> Change the `rev` and `sha256` in the following Nix expression to the latest
+> commit and its SHA256 hash respectively.
 
 ```nix
 { ... }:
@@ -54,8 +59,8 @@ nix-build --expr '((import <nixpkgs> {}).callPackage ./default.nix {}).cli'
 
 ```console
 $ ./result/bin/hasura version
-INFO hasura cli is up to date                      version=2.44.0
-INFO hasura cli                                    version=v2.44.0
+INFO hasura cli is up to date                      version=2.45.1
+INFO hasura cli                                    version=v2.45.1
 ```
 
 <!-- REFERENCES -->
