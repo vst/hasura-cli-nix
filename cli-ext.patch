@@ -7,7 +7,7 @@ index ee54d80..381ad19 100644
 -  "name": "scaffolder",
 -  "version": "1.0.0",
 +  "name": "cli-ext",
-+  "version": "2.45.1",
++  "version": "2.46.0",
 +  "bin": "build/command.js",
    "description": "A service to generate Hasura action scaffolds",
    "main": "src/server.js",
