@@ -59,8 +59,8 @@ nix-build --expr '((import <nixpkgs> {}).callPackage ./default.nix {}).cli'
 
 ```console
 $ ./result/bin/hasura version
-INFO hasura cli is up to date                      version=2.48.5
-INFO hasura cli                                    version=v2.48.5
+INFO hasura cli is up to date                      version=2.48.13
+INFO hasura cli                                    version=v2.48.13
 ```
 
 <!-- REFERENCES -->
