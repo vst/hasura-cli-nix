@@ -85,8 +85,8 @@ let
       platforms = with lib.platforms; linux ++ darwin;
     };
   };
-
 in
 {
+  inherit version;
   cli = hasura-cli;
 }

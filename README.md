@@ -54,6 +54,30 @@ You can use the [releases] to pin your Hasura CLI to a specific version. Feel
 free to open an issue or a pull request if you have any suggestions or
 improvements.
 
+## Upgrading to a Newer Version
+
+First, delete all hashes in `./default.nix`.
+
+Then, run the following command to upgrade to a newer version of Hasura CLI:
+
+```sh
+./bump.sh "<NEW_VERSION>"
+```
+
+For example:
+
+```sh
+./bump.sh "2.48.16"
+```
+
+Note that the version string does not contain the leading `v` character.
+
+Finally, run the following command and update hashes, until the build succeeds:
+
+```sh
+nix-build --expr '((import <nixpkgs> {}).callPackage ./default.nix {}).cli'
+```
+
 ## Building in Nix Shell
 
 To test if the derivation is building correctly, you can use the following
@@ -77,5 +101,6 @@ INFO hasura cli                                    version=v2.48.16
 [2]: https://github.com/hasura/graphql-engine/issues/6579
 [3]: https://github.com/hasura/graphql-engine/issues/8441
 [@adamgoose]: https://github.com/adamgoose
-[solution]: https://github.com/hasura/graphql-engine/issues/8441#issuecomment-2055727178
+[solution]:
+  https://github.com/hasura/graphql-engine/issues/8441#issuecomment-2055727178
 [releases]: https://github.com/vst/hasura-cli-nix/releases
