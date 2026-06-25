@@ -4,23 +4,28 @@ This is a Nix function that builds and installs Hasura CLI a la NixOS.
 
 ## Problem
 
-Hasura CLI is known to have issues with Nix, particularly with NixOS as far as I am concerned ([1], [2], [3], ...). In
-short, Hasura CLI extension system does not work on NixOS.
+Hasura CLI is known to have issues with Nix, particularly with NixOS as far as I
+am concerned ([1], [2], [3], ...). In short, Hasura CLI extension system does
+not work on NixOS.
 
-I understand that there has been various attempts by the community to fix this, but none which I tried worked for me except two:
+I understand that there has been various attempts by the community to fix this,
+but none which I tried worked for me except two:
 
-1. Use Hasura CLI from within a Docker container: This caused more problems then it solved.
-2. Use `buildFHSUserEnv`: This solution worked for me and my team for quite some time, but it has its own issues such
-   as a half-broken Nix shell where many commands do not work.
+1. Use Hasura CLI from within a Docker container: This caused more problems then
+   it solved.
+2. Use `buildFHSUserEnv`: This solution worked for me and my team for quite some
+   time, but it has its own issues such as a half-broken Nix shell where many
+   commands do not work.
 
-Recently, I bumped into the [solution] of [@adamgoose] that worked like a charm, at least for Hasura CLI v2.48.5.
+Recently, I bumped into the [solution] of [@adamgoose] that worked like a charm,
+at least for Hasura CLI v2.48.5.
 
 ## This Repository
 
-This repository offers [@adamgoose]'s solution as a Nix function that you can use in a Nix expression to build and install
-a functioning Hasura CLI.
+This repository offers [@adamgoose]'s solution as a Nix function that you can
+use in a Nix expression to build and install a functioning Hasura CLI.
 
-> [NOTE!]
+> [!WARNING]
 >
 > Change the `rev` and `sha256` in the following Nix expression to the latest
 > commit and its SHA256 hash respectively.
@@ -45,11 +50,38 @@ pkgs.mkShell {
 }
 ```
 
-You can use the [releases] to pin your Hasura CLI to a specific version. Feel free to open an issue or a pull request if you have any suggestions or improvements.
+You can use the [releases] to pin your Hasura CLI to a specific version. Feel
+free to open an issue or a pull request if you have any suggestions or
+improvements.
+
+## Upgrading to a Newer Version
+
+First, delete all hashes in `./default.nix`.
+
+Then, run the following command to upgrade to a newer version of Hasura CLI:
+
+```sh
+./bump.sh "<NEW_VERSION>"
+```
+
+For example:
+
+```sh
+./bump.sh "2.49.3"
+```
+
+Note that the version string does not contain the leading `v` character.
+
+Finally, run the following command and update hashes, until the build succeeds:
+
+```sh
+nix-build --expr '((import <nixpkgs> {}).callPackage ./default.nix {}).cli'
+```
 
 ## Building in Nix Shell
 
-To test if the derivation is building correctly, you can use the following command:
+To test if the derivation is building correctly, you can use the following
+command:
 
 ```sh
 nix-build --expr '((import <nixpkgs> {}).callPackage ./default.nix {}).cli'
@@ -59,8 +91,7 @@ nix-build --expr '((import <nixpkgs> {}).callPackage ./default.nix {}).cli'
 
 ```console
 $ ./result/bin/hasura version
-INFO hasura cli is up to date                      version=2.48.16
-INFO hasura cli                                    version=v2.48.16
+INFO hasura cli                                    version=v2.49.3
 ```
 
 <!-- REFERENCES -->
@@ -69,5 +100,6 @@ INFO hasura cli                                    version=v2.48.16
 [2]: https://github.com/hasura/graphql-engine/issues/6579
 [3]: https://github.com/hasura/graphql-engine/issues/8441
 [@adamgoose]: https://github.com/adamgoose
-[solution]: https://github.com/hasura/graphql-engine/issues/8441#issuecomment-2055727178
+[solution]:
+  https://github.com/hasura/graphql-engine/issues/8441#issuecomment-2055727178
 [releases]: https://github.com/vst/hasura-cli-nix/releases
