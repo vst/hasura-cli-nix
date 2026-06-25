@@ -67,7 +67,7 @@ Then, run the following command to upgrade to a newer version of Hasura CLI:
 For example:
 
 ```sh
-./bump.sh "2.48.16"
+./bump.sh "2.49.3"
 ```
 
 Note that the version string does not contain the leading `v` character.
@@ -91,8 +91,7 @@ nix-build --expr '((import <nixpkgs> {}).callPackage ./default.nix {}).cli'
 
 ```console
 $ ./result/bin/hasura version
-INFO hasura cli is up to date                      version=2.48.16
-INFO hasura cli                                    version=v2.48.16
+INFO hasura cli                                    version=v2.49.3
 ```
 
 <!-- REFERENCES -->
